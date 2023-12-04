@@ -1,0 +1,263 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0xd33CDe943670Cb291D43C3fbF798740B9C4C6205",
+    "txHash": "0x4cf557acd622fb5f4a986295ed06709cadbe5e90e022d7165312d98e7cc2d8af"
+  },
+  "proxies": [
+    {
+      "address": "0xAfeb68fEAc6C0637B6b4143F04E0105e3D00a488",
+      "txHash": "0x320cc488330d86a8c5b3fc46a75a4ff85c18ee7a63ad313413648844c0b03099",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "ae70b7d124b4ae69ea8c83b7a794fcba0f237bafac93e38e257b39039d43d19d": {
+      "address": "0x62133854DEf0dB894e66CC785921994Ff030E72A",
+      "txHash": "0x9373c0910fab2a24226869ce808a0ea2d3d1afccc6e429a1513ee6bea1638c64",
+      "layout": {
+        "solcVersion": "0.8.20",
+        "storage": [
+          {
+            "label": "batch",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "EggcessApp",
+            "src": "contracts\\eggcess.sol:14"
+          },
+          {
+            "label": "appTreasury",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "EggcessApp",
+            "src": "contracts\\eggcess.sol:15"
+          },
+          {
+            "label": "globalRaffle",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "EggcessApp",
+            "src": "contracts\\eggcess.sol:16"
+          },
+          {
+            "label": "bpsRevenueShare",
+            "offset": 20,
+            "slot": "2",
+            "type": "t_uint16",
+            "contract": "EggcessApp",
+            "src": "contracts\\eggcess.sol:17"
+          },
+          {
+            "label": "bpsGlobalRaffle",
+            "offset": 22,
+            "slot": "2",
+            "type": "t_uint16",
+            "contract": "EggcessApp",
+            "src": "contracts\\eggcess.sol:18"
+          },
+          {
+            "label": "bpsToPercentDivider",
+            "offset": 24,
+            "slot": "2",
+            "type": "t_uint16",
+            "contract": "EggcessApp",
+            "src": "contracts\\eggcess.sol:19"
+          },
+          {
+            "label": "isOwnershipTransferPending",
+            "offset": 26,
+            "slot": "2",
+            "type": "t_bool",
+            "contract": "EggcessApp",
+            "src": "contracts\\eggcess.sol:21"
+          },
+          {
+            "label": "pendingOwner",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "EggcessApp",
+            "src": "contracts\\eggcess.sol:22"
+          },
+          {
+            "label": "ownershipTransferTimestamp",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256",
+            "contract": "EggcessApp",
+            "src": "contracts\\eggcess.sol:23"
+          },
+          {
+            "label": "bids",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_string_memory_ptr,t_struct(BidData)2069_storage)",
+            "contract": "EggcessApp",
+            "src": "contracts\\eggcess.sol:33"
+          },
+          {
+            "label": "keys",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_array(t_string_storage)dyn_storage",
+            "contract": "EggcessApp",
+            "src": "contracts\\eggcess.sol:35"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)45_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)14_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)79_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_string_storage)dyn_storage": {
+            "label": "string[]",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_string_memory_ptr,t_struct(BidData)2069_storage)": {
+            "label": "mapping(string => struct EggcessApp.BidData)",
+            "numberOfBytes": "32"
+          },
+          "t_string_memory_ptr": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_string_storage": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_struct(BidData)2069_storage": {
+            "label": "struct EggcessApp.BidData",
+            "members": [
+              {
+                "label": "from",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "to",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "socialMediaHandle",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "balance",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_uint16": {
+            "label": "uint16",
+            "numberOfBytes": "2"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:40",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

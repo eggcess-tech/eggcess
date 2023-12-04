@@ -1,0 +1,1507 @@
+body, html {
+  height: 100%;
+  width: 100%;
+  font-size: 14px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.centered-content {
+  justify-content: center;
+  text-align: center;
+}
+
+.top-content {
+  padding-top: 100px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.search-container {
+  padding-top: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 800px;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+.search-header{
+  align-items: center;
+  display: flex;
+  gap: 1em;
+  width: 95%;
+  max-width: 600px;
+}
+
+.search-result{
+  align-items: start;
+  display: flex;
+  width: 95%;
+  max-width: 600px;
+  flex-direction: column;
+}
+
+.bidding-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.bidding-header-top {
+  position: fixed;
+  width: 100%;
+  background-color: white; /* Adjust as needed */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.bidding-header {
+  justify-content: space-between;
+  width: 95%;
+  height:70px;
+  display: flex;
+  
+  align-items: center;
+  max-width: 800px;
+}
+
+.bidding-header .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.bidding-header .user-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.bidding-header .user-info p {
+  word-wrap: break-word; /* Allow long words to be able to break and wrap onto the next line */
+  max-width: 150px; /* Set a maximum width for the text */
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  
+}
+
+.bidding-footer-container {
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  z-index: 900;
+}
+
+.bidding-footer-container .bidding-footer {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  
+}
+
+.bidding-footer-container .bidding-footer .message-info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  width: 100%;
+}
+
+.bidding-footer-container .bidding-footer .bid-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.bidding-footer-container .bidding-footer .bid-info p{
+  margin: 0;
+  padding: 3px;
+
+}
+
+/* Add or modify this in your CSS file */
+.file-input-label {
+  display: flex;
+  align-items: center;
+}
+
+.file-input-label input[type='file'] {
+  display: none;
+}
+
+.file-input-label span {
+  display: flex;
+  padding: 10px;
+  background-color: #ffa629;
+  color: black;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.file-input-label span:hover {
+  background-color: #ff7d00;
+}
+
+/* Add or modify this in your CSS file */
+/* Update or add this CSS to position the close button */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  
+}
+
+.popup-new {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center both vertically and horizontally */
+  max-width: 200px;
+  background: rgb(249, 241, 224);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  opacity: 0;
+  display: none;
+  transition: opacity 0.3s ease, display 0.3s ease;
+}
+
+
+.popup-privacy {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center both vertically and horizontally */
+  width: 80%;
+  height: 80%;
+  background: rgb(249, 241, 224);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  opacity: 0;
+  display: none;
+  transition: opacity 0.3s ease, display 0.3s ease;
+}
+
+/* State for showing the popup */
+.popup-privacy.show {
+  display: block;
+  opacity: 1;
+}
+
+/* State for showing the popup */
+.popup-new.show {
+  display: block;
+  opacity: 1;
+}
+
+.popup-new-content{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.popup-confirmation-content{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  
+}
+
+.popup-confirmation {
+  position: fixed; /* Fixed position to keep them at the bottom of the screen */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center both vertically and horizontally */
+  background: rgb(249, 241, 224);   
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 901;
+}
+
+
+/* Media query for screens with a maximum width of 600px (adjust as needed) */
+@media screen and (max-width: 600px) {
+  .popup-confirmation {
+    display: block; /* Show the popups for mobile devices */
+    position: fixed; /* Fixed position to keep them at the bottom of the screen */
+    left: 0;
+    right: 0;
+    bottom: 0; /* Position at the bottom */
+    width: 100%; /* Take full width of the screen */
+    transform: translate(-0%, -0%); /* Center both vertically and horizontally */
+    background: rgb(249, 241, 224);   
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 901;
+  }
+}
+
+.popup {
+  max-width: 200px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.popup img,
+.popup video {
+  width: 100%;
+  height: auto;
+}
+
+.close-popup-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff; /* Change the color as needed */
+}
+
+.close-popup-button:focus {
+  outline: none;
+}
+
+.privacy-policy-link {
+
+  text-align: center;
+  font-size: 12px;
+}
+
+.current-bid-box{
+  background-color: #ffffff; /* Use the primary color */
+  border-radius: 5px; /* Make the button rounded */
+  padding: 5px;
+  border: none;
+  outline: 2px solid lightgray;
+  width: 42px;
+  
+}
+
+.search-box{
+  background-color: #ffffff; /* Use the primary color */
+  border-radius: 10px; /* Make the button rounded */
+  padding: 10px;
+  border: none;
+  outline: 2px solid lightgray;
+  width: 100%;
+}
+
+.message-box{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background-color: #ffffff; /* Use the primary color */
+  border-radius: 10px; /* Make the button rounded */
+  padding: 10px;
+  border: none;
+  outline: 2px solid lightgray;
+  display: flex;
+  max-width: 400px;
+  width: 100%;
+  height: 18px;
+}
+
+
+
+.search-result ul {
+  width: 100%;
+  list-style: none; /* Remove the list dot */
+  padding: 3px; /* Remove any default padding */
+}
+
+.search-result ul li {
+  width: 100%;
+  display: flex;
+  align-items: start;
+
+}
+/* Add hover effect for list items */
+.search-result ul li:hover {
+  background-color: #ffe8a3; /* Change the background color on hover */
+  cursor: pointer; /* Change the cursor to a pointer on hover */
+}
+
+.search-result ul li img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.search-result ul li .user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-result ul li p {
+  padding: 2px;
+  margin: 0px; /* Remove default margin */
+}
+
+.search-result ul li .user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Search.css */
+
+.search-button {
+  width: 40px; /* Adjust the width to your icon's width */
+  height: 40px; /* Adjust the height to your icon's height */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.search-button img{
+  padding: 0px;
+  width: 40px; /* Adjust the width to your icon's width */
+  height: 40px; /* Adjust the height to your icon's height */
+}
+
+.sign-in-text {
+  margin-top: 10vh !important;
+  margin-bottom: 10vh !important;
+
+}
+
+.button-panel{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly; /* Align horizontally */
+  gap: 1rem;
+}
+
+/* Style the "SIGN IN" button */
+.sign-in-button {
+  margin-top: 10vh !important;
+  margin-bottom: 10vh !important;
+  background-color: #ffa629 !important; /* Use the primary color */
+  color: black !important; /* Change text color to black */
+  border: none !important;
+  padding: 15px 50px !important; /* Adjust padding to make the button wider */
+  border-radius: 25px !important; /* Make the button rounded */
+  cursor: pointer !important;
+  font-size: 16px !important;
+  transition: all 0.2s ease-in-out !important;
+  
+}
+.button {
+  display: flex;
+  background-color: #ffe8a3; /* Use the primary color */
+  color: black; /* Change text color to black */
+  padding: 6px;
+  border-width: 0;
+  border-color: #ccba82;
+  border-radius: 8px; /* Make the button rounded */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: none;
+  outline: 2px solid #ccba82;
+  min-width: 80px !important;
+  min-height: 25px !important;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.button:hover {
+  background-color: #ffa629 !important; /* Change color on hover */
+}
+
+
+.bid-button {
+  display: flex;
+  background-color: #ffe8a3; /* Use the primary color */
+  color: black; /* Change text color to black */
+
+  border-width: 0;
+  border-color: #ccba82;
+  border-radius: 10px; /* Make the button rounded */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: none;
+  outline: 2px solid #ccba82;
+ 
+  height: 35px;
+  min-width: 100px; /* Set a minimum width */
+  max-width: 200px; /* Set a maximum width */
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.bid-button:hover {
+  background-color: #ffa629 !important; /* Change color on hover */
+}
+
+
+
+.profile-button {
+  background-color: #ffe8a3 !important; /* Use the primary color */
+  color: black !important; /* Change text color to black */
+  height: 25px !important;
+  min-width: 100px !important;
+  border-width: 0 !important;
+  border-color: #ccba82;
+  border-radius: 10px !important; /* Make the button rounded */
+  cursor: pointer !important;
+  
+  transition: all 0.2s ease-in-out !important;
+  box-shadow: none !important;
+  outline: 2px solid #ccba82 !important;
+  align-items: center !important; /* Align vertically */
+  justify-content: center !important; /* Align horizontally */
+  white-space: nowrap !important; /* Prevent text wrapping */
+}
+
+.profile-button:hover {
+  background-color: #ffa629 !important; /* Change color on hover */
+}
+
+/* Add hover effect */
+.sign-in-button:hover {
+  background-color: #ff7d00 !important; /* Change color on hover */
+}
+
+
+.primary-color {
+  color: #ffa629;
+}
+
+.secondary-color {
+  color: #a86f1f;
+}
+
+.text-color-black {
+  color: black;
+}
+
+.egg-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.egg-logo img {
+  margin-top: 20vh;
+  height: 150px; /* Adjust the height as needed */
+}
+
+.egg-logo-header {
+  display: flex;
+}
+
+.egg-logo-header img {
+
+  height: 50px; /* Adjust the height as needed */
+}
+
+.link-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link-social img {
+  /*margin-top: 10vh;*/
+  height: 150px; /* Adjust the height as needed */
+}
+
+/* Center "EGGCESS.TECH" below the logo */
+.eggcess-text {
+  margin: 20px;
+  text-align: center;
+  font-size: 26px;
+}
+
+.eggcess-text-header {
+  
+  text-align: center;
+  font-size: 15px;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  40% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+.bounce-in {
+  animation: bounceIn 0.5s forwards;
+}
+
+.bounce-out {
+  animation: bounceOut 0.5s forwards;
+}
+
+/* Add a transition for the button */
+.button-container {
+  margin-top: 20px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column; /* Align vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+}
+
+/* Add a transition for the button */
+.web3-button {
+  all:var(#fff) !important; /* Use the primary color */ 
+  background-color: #ffe8a3 !important; /* Use the primary color */
+  color: black !important; /* Change text color to black */
+  border-width: 0 !important;
+  border-radius: 8px !important;
+  height: 25px !important;
+  min-width: 80px !important;
+  min-height: 25px !important;
+  outline: 2px solid #ccba82 !important; 
+  transition: all 0.2s ease-in-out !important; 
+  display: flex;
+  flex-direction: column; /* Align vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  font-weight: normal !important;
+  font-size: inherit !important;
+  padding: 6px !important;
+  
+}
+
+.web3-button:hover {
+  background-color: #ffa629 !important; /* Change color on hover */
+}
+
+/* Add a transition for the button */
+.web3-bid-button {
+  all:var(#fff) !important; /* Use the primary color */ 
+  background-color: #ffe8a3 !important; /* Use the primary color */
+  color: black !important; /* Change text color to black */
+  border-width: 0 !important;
+  border-radius: 8px !important;
+  min-width: 80px !important;
+  min-height: 35px !important;
+  outline: 2px solid #ccba82 !important; 
+  transition: all 0.2s ease-in-out !important; 
+  display: flex;
+  flex-direction: column; /* Align vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  font-weight: normal !important;
+  font-size: inherit !important;
+  padding: 6px !important;
+  
+}
+
+.web3-bid-button:hover {
+  background-color: #ffa629 !important; /* Change color on hover */
+}
+
+
+.button-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add a keyframe animation for shifting up */
+@keyframes shiftUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.shift-up {
+  animation: shiftUp 0.5s ease forwards;
+}
+
+/* Add a transition for the opacity of the LoginSocialTwitter component */
+.LoginSocialTwitter {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.LoginSocialTwitter.show {
+  opacity: 1;
+}
+
+.sentences {
+  display: inline-block;
+}
+
+.sentence {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+
+.twitter-button {
+  display: flex;
+  align-items: center; /* Align vertically */
+  justify-content: center; /* Align horizontally */
+  padding: 10px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.twitter-button img {
+  margin-right: 10px; /* Adjust spacing between icon and text */
+}
+
+.twitter-button:hover {
+  background-color: #4a4a4a;
+}
+
+.twitter-icon {
+  height: 20px;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.bottom-nav-container{
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  width: 100%; 
+  
+  height: 100px;
+  align-items: center;
+  justify-content: center; /* Align horizontally */
+  background-color: #fff;
+  z-index: 10;
+}
+
+.bottom-nav-container .bottom-nav{
+ 
+  max-width: 800px;
+  gap: 1rem;
+  padding: 5px;
+  align-items: center;
+  justify-content: space-evenly; /* Align horizontally */
+
+  font-weight:  500;
+  width: 100%;
+  
+}
+
+.bottom-nav-container .bottom-nav ul{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-evenly; /* Align horizontally */
+  width: 100%;
+}
+.bottom-nav-container .bottom-nav a{
+  color: inherit;
+  padding: 10px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 0.2rem;
+}
+
+.bottom-nav-container .bottom-nav li.active{
+  color: #ff7d00;
+
+}
+.bottom-nav-container .bottom-nav li:hover{
+  color: #ff7d00;
+
+}
+
+/* Add this to your CSS file */
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  width: 100%;
+}
+
+.icon-container img {
+  height: 40px; /* Adjust the height of the icon */
+}
+
+
+.top-nav-container{
+  display: flex;
+  width: 100%; 
+  position: fixed;
+  height: 100px;
+  align-items: center;
+  justify-content: center; /* Align horizontally */
+   background-color: #fff;
+   
+  z-index: 900;
+}
+
+.top-nav{
+  display: flex;
+  width: 100%;
+  height: 100px;
+  align-items: center;
+  justify-content: space-between; /* Align horizontally */
+  max-width: 800px;
+}
+
+.top-nav ul{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 3rem;
+  height: 100%;
+  
+}
+.top-nav a{
+  color: inherit;
+  padding: 10px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.top-nav li.active{
+  background-color: #555;
+
+}
+.top-nav li:hover{
+  color: #ff7d00;
+
+}
+
+.kol-nav-container{
+  z-index: 11;
+  background-color: #ffffff;
+  display: flex;
+  position: fixed;
+  width: 100%;
+  align-items: center;
+  justify-content: center; /* Align horizontally */
+  align-items: center;
+  
+}
+
+.kol-nav{
+
+  color: #000000;
+  gap: 2rem;
+  padding-top: 95px;
+  padding-bottom: 5px;
+  max-width: 800px;
+  
+}
+
+.kol-nav ul{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  align-items: center;
+  height: 100%;
+}
+.kol-nav a{
+  color: inherit;
+  padding: 10px;
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+}
+
+.kol-nav li.active{
+  font-weight: 600;
+
+}
+.kol-nav li:hover{
+  font-weight: bold;
+}
+
+/* Start Customise ConnectWallet button */
+.blank-button {
+  background-color: transparent !important; /* Use the primary color */
+  color: black !important; /* Change text color to black */
+  height: 30px !important;
+  width: 100% !important;
+  font-size: 12px !important;
+  white-space: nowrap !important; /* Prevent text wrapping */
+}
+
+.tw-connected-wallet__network-icon {
+  display: none;
+}
+
+.tw-connected-wallet__wallet-icon {
+  display: none;
+}
+
+span.tw-connected-wallet__address.css-14lfnbc {
+  display: none;
+}
+
+div.css-1b5osxr img {
+  display: none;
+}
+
+/* End Customise ConnectWallet button */
+
+.chat-display{
+  padding-top: 100px;
+  padding-bottom: 200px;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* CSS for left messages */
+.left-message {
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  padding-bottom: 10px;
+  flex-direction: column;
+}
+
+.left-message .message-bubble {
+  background-color: lightcyan; /* Blue background for left messages */
+  align-self: flex-start;
+}
+
+/* CSS for right messages */
+.right-message {
+  display: flex;
+  justify-content: flex-end;
+  text-align: left;
+
+  flex-direction: column;
+}
+
+.right-message .message-bubble {
+  background-color: #ffffff; /* White background for right messages */
+  align-self: flex-end;
+  
+}
+
+.text-message .message-bubble {
+  border: 1px solid lightgray; /* 2px gray border for all message bubbles */
+  margin: 0px; /* Margin around the message bubble */
+  max-width: 80%; /* Maximum width for the message bubble */
+  border-radius: 15px; /* Rounded corners */
+}
+
+.text-message p{
+ 
+  padding: 10px 10px 10px 0px ; /* Padding inside the message bubble */
+  margin: 0px;
+ 
+}
+
+/* CSS Styles */
+.my-profile-picture {
+  float: right;
+  margin-left: 5px;
+}
+
+.other-profile-picture {
+  float: left;
+  margin-right: 5px;
+}
+
+.my-message-content {
+  display: flex;
+  flex-direction: row-reverse; /* Display content in a reversed row for my messages */
+  padding: 10px;
+}
+
+.other-message-content {
+  display: flex;
+  flex-direction: row; /* Display content in a row */
+  padding: 10px;
+}
+
+.profile-picture img {
+  border-radius: 50%; /* Make the profile picture round */
+}
+
+.review-link-left {
+  padding-left: 65px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.review-link-right {
+  padding-right: 75px;
+  text-align: right;
+  font-size: 12px;
+}
+
+.review-button {
+  border: 0px;
+  background-color: transparent;
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #0088ff;
+}
+
+.review-button:hover {
+  color: darkblue;
+}
+
+.review-popup {
+  display: flex;
+  flex-direction: column; 
+  width:100%;
+  gap: 1em;
+}
+.review-popup textarea {
+  height: 100px;
+ 
+}
+
+.claim-button-message{
+
+  max-width: 80px;
+  text-wrap: wrap;
+  font-size: 12px;
+  line-height: 1.1;
+}
+
+
+.send-date {
+  padding-top: 5px;
+  font-size: 10px;
+  color: darkgray;
+  text-align: right;
+}
+
+.star {
+  cursor: pointer;
+}
+
+.date-group {
+  color: gray; /* Border for the message bubble */
+  text-align: center;
+  margin: 10px;
+}
+
+.message-content {
+  display: flex;
+}
+
+.profile-picture {
+  border-radius: 50%;
+}
+
+.my-profile-picture img {
+  border: 2px solid #fff; /* Border for the profile picture */
+}
+
+.other-profile-picture img {
+  border: 2px solid #fff; /* Border for the profile picture */
+}
+
+.message-bubble {
+  border: 2px solid gray; /* Border for the message bubble */
+  padding: 10px;
+  border-radius: 10px; /* Rounded corners */
+}
+
+
+/* CSS for BidInfo component */
+.bid-info-container {
+  display: flex;
+  justify-content: center; 
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  padding-top: 150px;
+  padding-bottom: 100px;
+
+}
+
+.profile-image img {
+  width: 50px; /* Adjust the width as needed */
+  height: 50px; /* Adjust the height as needed */
+  border-radius: 50%; /* Make it a circle */
+  margin-right: 5px;
+}
+
+.bid-details {
+  
+  flex: 1; /* Take up remaining space */
+  padding: 10px;
+}
+
+.bid-details p {
+  margin: 5px;
+  line-height: 1.2;
+}
+
+.bid-details p strong {
+  font-weight: bold;
+}
+
+.bid-details p span {
+  color: blue;
+}
+
+.bid-details p:last-child {
+  color: #ffa629; /* Blue color for timeAgo */
+}
+.bid-positive {
+  color: #ffa629; /* Blue color for timeAgo */
+}
+.bid-positive::before {
+  content: "+";
+}
+
+.bid-negative {
+  color: red;
+}
+
+.bid-negative::before {
+  content: "-";
+}
+
+.bid-info-container .bid-info-view {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+  gap: 0.5rem;
+
+}
+
+.bid-info-container .bid-info {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.bid-info-container .bid-info:hover {
+  background-color: lightyellow;
+}
+
+.connect-button {
+  background-color: #ffa629; /* Example button style */
+  color: black;
+  border: none;
+  padding: 7px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: 2px solid #cc8521;
+}
+
+.connect-button:hover {
+  background-color: #ffe8a3; /* Example hover style */
+}
+
+.withdraw-button {
+  background-color: red; /* Example button style */
+  color: white;
+  border: none;
+  padding: 7px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: 2px solid darkred;
+}
+
+.withdraw-button:hover {
+  background-color: #ffa629; /* Example hover style */
+  color: black;
+}
+
+/* CSS for MessagePopup component */
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Translucent gray background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup button.close-popup-button {
+  border: 1px solid white;
+  border-radius: 50%; /* Make it a circle */
+  margin-top: 120px;
+  margin-right: 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #ffffff;
+}
+
+.popup button.close-popup-button:hover {
+  color: red;
+  border: 1px solid red;
+}
+
+/* Add any other styles you need for your popup content */
+
+.global-profile-image img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: -10px; /* Adjust the negative margin to control the overlap */
+  position: relative;
+  z-index: 3; /* Set a higher z-index to ensure it's on top of other elements */
+}
+
+.global-profile-image img:first-child {
+  z-index: 2; /* Set a higher z-index for the first image */
+}
+
+.airdrop-container{
+ 
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+  padding-bottom: 100px;
+  align-items: center;
+  width: 80%;
+  max-width: 500px;
+}
+
+.link-social-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  align-items: center;
+}
+
+.airdrop-container p{
+  margin: 5px;
+ 
+}
+
+
+.point-details{
+  display: flex;
+}
+
+.point-details p strong {
+  font-weight: 600;
+  justify-content: start;
+}
+
+.new-messages-label {
+ 
+  background-color: navy; /* Background color of the label */
+  color: white;
+  border-radius: 50%; /* Make it round */
+  padding: 5px 10px;
+  font-size: 12px;
+  
+}
+
+.claim-message {
+  color: orange;
+  font-size: 10px;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+input.css-wtjova {
+  display: none;
+}
+
+.active-icon img {
+  filter: invert(10%);
+}
+
+
+leaderboard-entry {
+  border: 0px;
+  justify-content: center;
+}
+
+.leaderboard-entry:hover {
+  background-color: lightyellow;
+  cursor: pointer;
+}
+
+.table {
+  width: 100%;
+  max-width: 600px;
+  border: 0;
+  border-collapse: collapse; /* Remove cell spacing */
+}
+
+.table th, .table td {
+  padding: 5px;
+  vertical-align: middle;
+}
+
+/* CSS File */
+.unclickable {
+  text-decoration: none; /* Remove underline for unclickable links */
+  cursor: not-allowed; /* Change cursor to not-allowed for unclickable links */
+}
+
+.clickable {
+  text-decoration: none; /* Add underline on hover for clickable links */
+  cursor: pointer; /* Change cursor to pointer on hover for clickable links */
+}
+
+.clickable:hover{
+  text-decoration: underline; /* Add underline on hover for clickable links */
+  cursor: pointer; /* Change cursor to pointer on hover for clickable links */
+}
+
+.clickable-link-button {
+  background-color: transparent;
+  border: none;
+  text-decoration: none; /* Add underline on hover for clickable links */
+  cursor: pointer; /* Change cursor to pointer on hover for clickable links */
+}
+
+.clickable-link-button:hover{
+  text-decoration: underline; /* Add underline on hover for clickable links */
+  cursor: pointer; /* Change cursor to pointer on hover for clickable links */
+}
+
+.funding-container {
+  
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 500px;
+  flex-direction: column;
+  width: 90%;
+
+}
+
+.funding-container p{
+  width: 100%;
+  align-items: start;
+  color: gray;
+}
+
+.funding-container h3{
+  width: 100%;
+  align-items: start;
+  
+ }
+
+/* Add these styles to your CSS stylesheet or use inline styles */
+
+.button-container-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+}
+
+.back-button {
+  color: #ffa629;
+  text-decoration: none;
+  align-self: flex-start; /* Align to the left */
+}
+
+.back-button:hover {
+  color: #ff7d00;
+  text-decoration: underline;
+  align-self: flex-end; /* Align to the right */
+}
+
+.skip-button {
+  color: #ffa629;
+  text-decoration: none;
+  align-self: flex-end; /* Align to the right */
+}
+
+.skip-button:hover {
+  color: #ff7d00;
+  text-decoration: underline;
+  align-self: flex-end; /* Align to the right */
+}
+
+.button-onboarding{
+
+  background-color: #ffa629 !important; /* Use the primary color */
+  color: black !important; /* Change text color to black */
+  border: none !important;
+  padding: 15px 50px !important; /* Adjust padding to make the button wider */
+  border-radius: 25px !important; /* Make the button rounded */
+  cursor: pointer !important;
+  font-size: 16px !important;
+  transition: all 0.2s ease-in-out !important;
+  width: 100%;
+}
+
+/* Add hover effect */
+.button-onboarding:hover {
+  background-color: #ff7d00 !important; /* Change color on hover */
+}
+
+.getstarted-container {
+  
+  padding-top: 30px;
+  padding-bottom: 30px;
+  
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 500px;
+  flex-direction: column;
+  width: 90%;
+
+}
+
+.description-box{
+  background-color: #ffe8a3;
+  padding-top: 1px;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 25px ;
+}
+
+
+.enable-notifications-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.enable-notifications-button img {
+ 
+  height: 50px; /* Adjust the height as needed */
+}
+
+*[id="radix-:r9:"] > div:nth-child(1) > div > div > div > div:nth-child(2) > div > ul > li > div > div:nth-child(2) {
+  display: none;
+}
+
+*[id="radix-:r3:"] > div:nth-child(1) > div > div > div > div:nth-child(2) > div > ul > li > div > div:nth-child(2) {
+  display: none;
+}
+

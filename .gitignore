@@ -1,0 +1,9 @@
+/desktop.ini
+
+attachments/
+node_modules/
+.env
+.cache/
+cache
+artifacts/
+hardhat.config.js
