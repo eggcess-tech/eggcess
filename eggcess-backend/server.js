@@ -213,7 +213,8 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
 
     app.get('/api/userUpdateEmail', async (req, res) => {
       const { wallet_address, email } = req.query;
-      console.error('Debug: enter get user: ' + wallet_address); // Corrected variable name to wallet_address
+      console.error('Debug: update email - wallet_address = ' + wallet_address); // Corrected variable name to wallet_address
+      console.error('Debug: update email - email =  ' + email); // Corrected variable name to wallet_address
       try {
         const [rows] = await connection.execute('SELECT * FROM users WHERE wallet_address = ?', [wallet_address]); // Corrected variable name to wallet_address
         if (rows.length > 0) {
