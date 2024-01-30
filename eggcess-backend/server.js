@@ -190,9 +190,60 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
     });
 
     setInterval(() => {
-      //console.log("pinging");
-      connection.query('select 1')
-    }, 120000);
+      const now = new Date();
+      const hours = now.getUTCHours();
+      const minutes = now.getUTCMinutes();
+    
+      connection.query('select 1');
+      //console.log(hours);
+      //console.log(minutes);
+      // Check if it's 12:00 AM UTC
+      if (hours === 0 && minutes === 0) {
+        console.log('Running daily update at 12 AM UTC');
+        updateTwitterProfileImages();
+      }
+    }, 60000); // Check every 2 minutes (adjust as needed)
+
+  
+    // Function to update Twitter profile images
+    async function updateTwitterProfileImages() {
+      try {
+        // Fetch all users from the database
+        const [usersRows] = await connection.execute('SELECT twitter, profile_image_url FROM users');
+
+        // Use Promise.all to make parallel requests to Twitter API for each user
+        const twitterApiRequests = usersRows.map(async (userRow) => {
+          const username = userRow.twitter.replace(/@/, '');
+
+          try {
+            const response = await axios.get(`https://api.twitter.com/2/users/by/username/${username}?user.fields=public_metrics,profile_image_url`, {
+              headers: {
+                'Authorization': `Bearer ${process.env.BEARER}`,
+              },
+            });
+
+            if (response.status === 200) {
+              const twitterUser = response.data.data;
+
+              // Check if the profile_image_url is different
+              if (twitterUser.profile_image_url !== userRow.profile_image_url) {
+                // Update the profile_image_url in the database
+                await connection.execute('UPDATE users SET profile_image_url = ? WHERE twitter = ?', [twitterUser.profile_image_url, userRow.twitter]);
+              }
+            }
+          } catch (error) {
+            console.error(`Error updating profile_image_url for ${username}:`, error);
+          }
+        });
+
+        // Wait for all Twitter API requests to complete
+        await Promise.all(twitterApiRequests);
+
+        console.log('Profile images updated successfully');
+      } catch (error) {
+        console.error('Error updating profile images:', error);
+      }
+    }
 
     // Route to get user by wallet address
     app.get('/api/user/:address', async (req, res) => {
@@ -299,6 +350,7 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
     app.post('/api/createUser', async (req, res) => {
       const { name, twitter, wallet_address, profile_image_url, ReferredBy, eggcess_handle, email} = req.body;
       const ReferralCode = await generateUniqueReferralCode();
+      const emailValue = email !== undefined ? email : null;
 
       console.error('Debug: enter create user: ' + wallet_address);
       console.error('name: ' + name);
@@ -307,17 +359,20 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
       console.error('ReferredBy: ' + ReferredBy);
       console.error('ReferralCode: ' + ReferralCode);
       console.error('eggcess_handle: ' + eggcess_handle);
-      console.error('email: ' + email);
+      
+      console.error('email: ' + emailValue);
 
       try {
-        const [userexist] = await connection.execute('update users set name = ?, twitter = ?, wallet_address = ?, profile_image_url =? , ReferralCode = ?, ReferredBy = ?, eggcess_handle = ?, email = ? where eggcess_handle = ?', [name, twitter, wallet_address, profile_image_url, ReferralCode, ReferredBy, eggcess_handle, email, eggcess_handle]);
+        const [userexist] = await connection.execute('update users set name = ?, twitter = ?, wallet_address = ?, profile_image_url =? , ReferralCode = ?, ReferredBy = ?, eggcess_handle = ?, email = ? where eggcess_handle = ?', [name, twitter, wallet_address, profile_image_url, ReferralCode, ReferredBy, eggcess_handle, emailValue, eggcess_handle]);
         
         console.log("Updated user: " + userexist.affectedRows);
 
         if (userexist.affectedRows == 0)
         {
-          await connection.execute('INSERT INTO users (name, twitter, wallet_address, profile_image_url, ReferralCode, ReferredBy, eggcess_handle, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [name, twitter, wallet_address, profile_image_url, ReferralCode, ReferredBy, eggcess_handle, email]);
+        
+          await connection.execute('INSERT INTO users (name, twitter, wallet_address, profile_image_url, ReferralCode, ReferredBy, eggcess_handle, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [name, twitter, wallet_address, profile_image_url, ReferralCode, ReferredBy, eggcess_handle, emailValue]);
           console.log('Handler claimed!');
+      
         }
         else
         {
@@ -425,7 +480,7 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
         
         res.status(200).json({ success: true, data: rows[0] });
       } catch (error) {
-        console.error('Error creating user:', error.code);
+        console.error('Error creating user:', error);
         res.status(500).json({ success: false, error: error.code });
       }
     });
