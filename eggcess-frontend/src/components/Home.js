@@ -96,7 +96,7 @@ const HomeContent = () => {
   
 
   useEffect(() => {
-    console.log("Environmnent: " + process.env.NODE_ENV)
+    console.log("Environmnent: " + process.env.NODE_ENV);
     const urlParams = new URLSearchParams(window.location.search);
     const referredBy = urlParams.get('ref');
     if (embeddedWallet) {

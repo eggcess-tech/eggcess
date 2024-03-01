@@ -33,6 +33,7 @@ function App() {
   const shouldShowNavbar = !['/', '/logout', '/sw', '/funding', '/getStarted', '/notificationRequest', '/home', '/login', '/linkSocial', '/pleaseWait', '/bidding', '/TestPage'].includes(location.pathname);
 
   useEffect(() => {
+    console.log("Environmnent: " + process.env.NODE_ENV);
     // Check if 'eggcess_user' exists in localStorage
     if (location.pathname !== '/pleaseWait')
     {
