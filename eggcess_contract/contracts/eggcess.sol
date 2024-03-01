@@ -6,6 +6,21 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
+interface IBlast {
+  // Note: the full interface for IBlast can be found below
+  function configureClaimableGas() external;
+  function claimAllGas(address contractAddress, address recipient) external returns (uint256);
+}
+
+interface IBlastPoints {
+    /** 
+     *  Note that the operator address should be an EOA whose private key is accessible to an internet connected server.
+     *  We recommended setting this value to a distinct address so that other admin responsibilities are not co-mingled 
+     *  with this address, whose key must live on a hot server.
+    */
+	function configurePointsOperator(address operator) external;
+}
+
 /**
  * @dev EggcessApp is a smart contract that facilitates the transfer of Ether (ETH) between users based on social media handles.
  */
@@ -22,6 +37,7 @@ contract EggcessApp is Initializable, OwnableUpgradeable, ReentrancyGuardUpgrade
     address public pendingOwner;                // Address of the pending owner during ownership transfer
     uint256 public ownershipTransferTimestamp;  // Timestamp for ownership transfer
 
+
     // BidData struct stores information about a bid.
     struct BidData {
         address from;              // Sender's address
@@ -33,6 +49,8 @@ contract EggcessApp is Initializable, OwnableUpgradeable, ReentrancyGuardUpgrade
     mapping (string => BidData) public bids; // Mapping to store bid data based on a key
 
     string[] public keys; //For Testing to keep track of all the keys
+
+    IBlast public constant BLAST = IBlast(0x4300000000000000000000000000000000000002);
 
     // Events to log bid and ownership transfer events
     event SendBid(address indexed from, address indexed to, uint256 amount);
@@ -63,6 +81,9 @@ contract EggcessApp is Initializable, OwnableUpgradeable, ReentrancyGuardUpgrade
         bpsToPercentDivider = 10000;
         __ReentrancyGuard_init();
         __Ownable_init(msg.sender);
+
+        // This sets the Gas Mode for MyContract to claimable
+        BLAST.configureClaimableGas(); 
     }
 
     // Modifier to restrict functions to only the current owner.
@@ -323,9 +344,15 @@ contract EggcessApp is Initializable, OwnableUpgradeable, ReentrancyGuardUpgrade
         return (allKeys, allData);
     }
 
-   function getVersion() external  pure returns (string memory) {
-    return "V4";
+    function getVersion() external  pure returns (string memory) {
+        return "v1";
+    }
+    
+    function claimMyContractsGas() external isOwner {
+        BLAST.claimAllGas(address(this), msg.sender);
     }
 
-    
+    function setPointsOperator(address _BlastPointsAddress, address _pointsOperator) external isOwner {
+		IBlastPoints(_BlastPointsAddress).configurePointsOperator(_pointsOperator);
+	}    
 }

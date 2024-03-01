@@ -8,10 +8,7 @@ const Dashboard = () => {
   const [points, setPoints] = useState(0);
   const [ranking, setRanking] = useState(0);
   const [bids, setBids] = useState([]);
-  const [currentCoinSymbol, setCurrentCoinSymbol] = useState('');
   
-  const wallet = useWallet();
-
   const user_data = JSON.parse(localStorage.getItem('eggcess_user'));
 
     // Component to calculate time ago
@@ -156,13 +153,9 @@ const Dashboard = () => {
     }
   };
 
-  const setCurrencySymbol = async () => {
-    var data = await wallet.getBalance();
-    setCurrentCoinSymbol(data.symbol);
-  }
+ 
   
   useEffect(() => {
-    setCurrencySymbol();
     fetchBids();
     fetchPoints();
     const intervalId = setInterval(() => {

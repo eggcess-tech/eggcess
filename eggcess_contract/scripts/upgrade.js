@@ -2,8 +2,9 @@
 const { ethers, upgrades } = require("hardhat");
 
 async function main() {
-    const Eggcess2 = await ethers.getContractFactory("EggcessApp");
-  const eggcess = await upgrades.upgradeProxy("0xF34107f32833fbAB8083C635cca9BA51d574E5f2", Eggcess2 );
+  const Eggcess2 = await ethers.getContractFactory("EggcessApp");
+  // Blast address
+  const eggcess = await upgrades.upgradeProxy("0x23cEa68B56d83f133403EA75dF21768c0BDc6fd1", Eggcess2 );
   await eggcess.waitForDeployment();
   console.log("Eggcess deployed to:", await eggcess.getAddress());
 }

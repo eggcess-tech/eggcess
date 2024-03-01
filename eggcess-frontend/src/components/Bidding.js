@@ -646,12 +646,29 @@ const Bidding = () => {
 
   const setCurrencySymbol = async () => {
     var data = await wallet.getBalance();
+    user_data.CoinSymbol = data.symbol;
+    console.log(user_data);
+    // Store the updated user data back in localStorage
+    localStorage.setItem('eggcess_user', JSON.stringify(user_data));
+
+    // Assuming setCurrentCoinSymbol is a state setter
     setCurrentCoinSymbol(data.symbol);
   }
   
   useEffect(() => {
-    setCurrencySymbol();
-    setUserData(JSON.parse(localStorage.getItem('eggcess_user')));
+
+    const user = JSON.parse(localStorage.getItem('eggcess_user'))
+
+    if (user.CoinSymbol === undefined || user.CoinSymbol === ''){
+      setCurrencySymbol();
+    }
+    else
+    {
+      console.log("user_data.CoinSymbol found " + user_data.CoinSymbol);
+      setCurrentCoinSymbol(user.CoinSymbol);
+    }
+   
+    setUserData(user);
     checkIsAddressKOL();
     getClaimable();
     checkUser();

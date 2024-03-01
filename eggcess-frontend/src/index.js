@@ -16,7 +16,6 @@ root.render(
   <React.StrictMode>
     <ThirdwebProvider 
         theme="light"
-
         clientId={process.env.REACT_APP_THIRDWEB_CLIENTID}
         supportedChains={[process.env.NODE_ENV === 'production' ? BlastBlastmainnet : BlastSepoliaTestnet]}
         supportedWallets={[
