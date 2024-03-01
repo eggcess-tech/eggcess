@@ -1,16 +1,18 @@
-import React, { useState, useContext  } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import SearchIcon from '../images/search-icon.png';
 import EccgessIcon from '../images/egg-small-icon.png';
 import TwitterIcon from '../images/twitter-small-icon.png';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
 import { SearchResultContext } from '../components/SearchResultContext';
-
+import { useWallet  } from "@thirdweb-dev/react";
 
 const Search = () => {
     const { searchText, setSearchText } = useContext(SearchResultContext);
     const { searchResult, setSearchResult } = useContext(SearchResultContext);
     const [isSearched, setIsSearched] = useState(false);
-
+    const [currentCoinSymbol, setCurrentCoinSymbol] = useState('');
+  
+    const wallet = useWallet();
   
     const apiUrl = `${process.env.REACT_APP_SERVER_ROOT_URL + "/api/search-twitter?username=" + searchText}`;
     
@@ -49,7 +51,14 @@ const Search = () => {
     navigate('/bidding', { state: { user } });
   };
 
-  
+  const setCurrencySymbol = async () => {
+    var data = await wallet.getBalance();
+    setCurrentCoinSymbol(data.symbol);
+  }
+
+  useEffect(() => {
+    setCurrencySymbol();
+  }, []);
 
   return (
     <div className='container' >
@@ -101,8 +110,8 @@ const Search = () => {
                         ) : null}
                   </div>
                   <br />
-                  <p style={{ margin: '0', padding: '0' }}>Current Bid: {(parseFloat(user.last_offered_bid || 0) + 0.001).toFixed(4) } BNB</p>
-                  <p style={{ margin: '0', padding: '0' }}>Highest Accepted: {parseFloat(user.highest_accepted_bid || 0).toFixed(4)} BNB</p>
+                  <p style={{ margin: '0', padding: '0' }}>Current Bid: {(parseFloat(user.last_offered_bid || 0) + 0.001).toFixed(4) } { currentCoinSymbol}</p>
+                  <p style={{ margin: '0', padding: '0' }}>Highest Accepted: {parseFloat(user.highest_accepted_bid || 0).toFixed(4)} {currentCoinSymbol}</p>
                 </div>
                 </div>
                 

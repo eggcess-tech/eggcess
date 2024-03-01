@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NavbarKOL from '../components/NavbarKOL';
+import NavbarChats from '../components/NavbarChats';
 
 import axios from 'axios';
 import MessagePopup from '../components/WithdrawPopup'; // Import your popup component
@@ -97,7 +97,7 @@ const YourBids = () => {
   return (
     
       <div className="container">
-        <NavbarKOL />
+        <NavbarChats />
 
           <div className="bid-info-container">
           {bids.map((bid) => (

@@ -134,7 +134,7 @@ const WithdrawPopup = ({ bid, onClose, fetchBids, show }) => {
     let errorMessage = 'An error occurred';
 
     if (error.reason === 'insufficient funds' || error.reason === 'insufficient funds for intrinsic transaction cost') {
-      errorMessage = 'Insufficient funds. Please deposit more BNB.';
+      errorMessage = 'Insufficient funds. Please deposit more ' + bid.CoinSymbol + '.';
     } else if (error.reason === 'excessive gas price') {
       errorMessage = 'Gas price is too high. Please try again later.';
     } else if (error.reason) {
@@ -247,7 +247,7 @@ const WithdrawPopup = ({ bid, onClose, fetchBids, show }) => {
                 </button>
               </div>
               </div>
-              <p>Bid amount {parseFloat(bid.Amount).toFixed(4)} BNB</p>
+              <p>Bid amount {parseFloat(bid.Amount).toFixed(4)} {bid.CoinSymbol}</p>
             </div>
           )}
         </div>

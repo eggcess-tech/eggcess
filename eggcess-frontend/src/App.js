@@ -30,7 +30,7 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 function App() {
   const location = useLocation();
 
-  const shouldShowNavbar = !['/', '/logout', '/sw', '/funding', '/getStarted', '/notificationRequest', '/home', '/login','/dashboard', '/linkSocial', '/pleaseWait', '/bidding', '/TestPage'].includes(location.pathname);
+  const shouldShowNavbar = !['/', '/logout', '/sw', '/funding', '/getStarted', '/notificationRequest', '/home', '/login', '/linkSocial', '/pleaseWait', '/bidding', '/TestPage'].includes(location.pathname);
 
   useEffect(() => {
     // Check if 'eggcess_user' exists in localStorage

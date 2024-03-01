@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NavbarKOL from '../components/NavbarKOL';
+import NavbarChats from '../components/NavbarChats';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
 
 const BidInfo = ({ bid, handleListItemClick}) => {
@@ -112,7 +112,7 @@ const KOL = () => {
 
   return (
       <div className="container">
-        <NavbarKOL />
+        <NavbarChats />
 
           <div className="bid-info-container">
           {bids.map((bid) => (

@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../styles/Main.css';
 import eggLogo from '../images/egg-logo.png';
 import { useNavigate  } from 'react-router-dom';  // Import Redirect from react-router-dom
-import { OpbnbTestnet, Opbnb } from "@thirdweb-dev/chains";
+import { OpbnbTestnet, Opbnb, BlastSepoliaTestnet, Ethereum} from "@thirdweb-dev/chains";
 import PopupPrivacy from "../components/PopupPrivacy";
-import { Magic } from 'magic-sdk';
 
 import {
   useAddress,
@@ -27,7 +26,7 @@ const HomeContent = () => {
   const navigate = useNavigate();
   const apiUrl = `${process.env.REACT_APP_SERVER_ROOT_URL + "/api/user/" + address}`;
   const apiUpdateEmailUrl = `${process.env.REACT_APP_SERVER_ROOT_URL + "/api/userUpdateEmail"}`;
-  const wallet = useWallet();
+  const embeddedWallet = useWallet("embeddedWallet");
   const switchChain = useSwitchChain();
 
   const openShowPopup = async () => {
@@ -53,9 +52,11 @@ const HomeContent = () => {
         if (errorResponse.message === 'User not found') {
           console.error("User not found");
           console.error("Wallet address: " + address);
-          
+          const email = await embeddedWallet.getEmail();
+          console.log('email: ', email);
           // Assuming 'navigate' is a function that redirects the user to the specified route
           localStorage.setItem('new_wallet_address', address);
+          localStorage.setItem('email', email);
           navigate('/linkSocial');
           return null;
         } 
@@ -67,8 +68,7 @@ const HomeContent = () => {
   
         // If email is null, update it with the current user's email
         if (data.email === null) {
-          const magic = new Magic(process.env.REACT_APP_MAGICLINK_API);
-          const email = (await magic.user.getMetadata()).email;
+          const email = embeddedWallet.getEmail();
           console.log('email: ', email);
   
           // Update email through another API endpoint
@@ -80,7 +80,7 @@ const HomeContent = () => {
   
         console.error("User found");
         // Assuming 'navigate' is a function that redirects the user to the specified route
-        navigate('/kol');
+        navigate('/dashboard');
         return null; 
       }
     } catch (error) {
@@ -99,14 +99,16 @@ const HomeContent = () => {
    
     const urlParams = new URLSearchParams(window.location.search);
     const referredBy = urlParams.get('ref');
-    if (wallet) {
+    if (embeddedWallet) {
       
       if (process.env.NODE_ENV === 'production'){
-        switchChain(Opbnb.chainId);
-        console.log("Switching to Opbnb");
+        //switchChain(Opbnb.chainId);
+        //console.log("Switching to Opbnb");
       }else{
-        switchChain(OpbnbTestnet.chainId);
-        console.log("Switching to OpbnbTestnet");
+        // switchChain(OpbnbTestnet.chainId);
+        // console.log("Switching to OpbnbTestnet");
+        //switchChain(BlastSepoliaTestnet.chainId);
+        //console.log("Switching to BlastSepoliaTestnet");
       }
     }
 

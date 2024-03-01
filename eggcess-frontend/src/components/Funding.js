@@ -3,7 +3,7 @@ import BNBIcon from '../images/opBNB.jpg';
 import EggcessIcon from '../images/egg-logo.png';
 import CopyIcon from '../images/copy-icon.jpg';
 import FundingIcon from '../images/funding.png';
-import { OpbnbTestnet, Opbnb } from "@thirdweb-dev/chains";
+import { OpbnbTestnet, Opbnb, BlastSepoliaTestnet } from "@thirdweb-dev/chains";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
 // import {
 //     ConnectWallet,
@@ -74,27 +74,27 @@ const Funding = () => {
         {/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
           <img src={FundingIcon}  width="200px" alt="Funding Logo" />
         </div> */}
-        <h3>Get some BNB on opBNB chain</h3>
-        <div className="description-box" style={{ width: '95%' }}>
-        <p><b>Option 1</b></p>
-          <p>Withdraw BNB via opBNB chain directly from Binance</p>
-      </div>
+        <h3>Get some ETH on Blast L2</h3>
+          <div className="description-box" style={{ width: '95%' }}>
+          <p><b>Option 1</b></p>
+            <p>Send ETH directly from your main wallet to Eggcess wallet in Blast L2.</p>
+        </div>
 
 
         <br />
         <div className="description-box" style={{ width: '95%' }}>
         <p><b>Option 2</b></p>
-        <p>Step 1: Bridge BNB from your main wallet to opBNB using<br />
-            <a href="https://opbnb-bridge.bnbchain.org/deposit" target="_blank">https://opbnb-bridge.bnbchain.org/deposit</a>
+        <p>Bridge ETH from your Ethereum Mainnet wallet in to Blast L2<br /> Eggcess wallet using <a href="https://blast.io/en/bridge" target="_blank">https://blast.io/en/bridge</a>
         </p>
 
-        <p>Step 2: Send BNB to your eggcess wallet from your main wallet. You'll use BNB when you bid for access to your favorite people.</p>
+        <p>You'll use ETH when you bid for access to your favorite people.</p>
         </div>
 
         <h3>Network</h3>
 
         <div style={{ width: '100%', display: 'flex', alignItems: 'left' }}>
-          <input className='search-box' type="text" value="opBNB Chain" disabled />
+          {/* <input className='search-box' type="text" value="opBNB Chain" disabled /> */}
+          <input className='search-box' type="text" value="Blast L2" disabled />
         </div>
 
         <h3>Your Eggcess wallet address</h3>

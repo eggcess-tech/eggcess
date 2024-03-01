@@ -16,8 +16,13 @@ const PrivateKeyWallet = require('@thirdweb-dev/wallets').PrivateKeyWallet;
 const ethers =  require('ethers');
 const contractAbi =  require('./abi.json');
 const e = require('express');
-const OpbnbTestnet =  require('@thirdweb-dev/chains').OpbnbTestnet;
+//const OpbnbTestnet =  require('@thirdweb-dev/chains').OpbnbTestnet;
+//const OpbnbTestnet =  require('@thirdweb-dev/chains').BlastTestnet;
+const OpbnbTestnet =  require('@thirdweb-dev/chains').BlastSepoliaTestnet;
 const Opbnb =  require('@thirdweb-dev/chains').Opbnb;
+
+const BlastTestnet =  require('@thirdweb-dev/chains').BlastSepoliaTestnet;
+const BlastBlastmainnet =  require('@thirdweb-dev/chains').BlastBlastmainnet;
 
 dotenv.config();
 
@@ -54,6 +59,10 @@ const T3_FOLLOWERS = 100001;  //Less than 100,001 followers
 
 const providerUrl = process.env.RPC_PROVIDER_URL; // BSC RPC endpoint
 const provider = new ethers.providers.JsonRpcProvider(providerUrl);
+
+//const symbol = 'BNBUSDT';
+const symbol = 'ETHUSDT';
+
 
 const getGasPrice = async () => {
   try {
@@ -332,8 +341,7 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
           from_address, // Replace with the actual sender's address
           system_address, // Replace with the actual receiver's address
           eggcess_handle, // Replace with the actual social media handle
-          wallet_address,
-          options
+          wallet_address
         );
   
         // Wait for the transaction to be confirmed
@@ -388,7 +396,7 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
             }, {});
             
             const privateKey = process.env.REACT_APP_E_WALLET_ADDRESS_PK;
-            const wallet = new PrivateKeyWallet(privateKey, process.env.NODE_ENV === 'production' ? Opbnb : OpbnbTestnet);
+            const wallet = new PrivateKeyWallet(privateKey, process.env.NODE_ENV === 'production' ? BlastBlastmainnet : BlastTestnet);
             const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
             // Connect to the contract using the wallet
             const contract2 = new ethers.Contract(contractAddress, contractAbi, await wallet.getSigner());
@@ -514,7 +522,17 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
     
       try {
         const [rows] = await connection.execute(
-          'SELECT SUM(points) AS Points FROM eggcess.airdrop WHERE wallet_address = ?',
+          'SELECT * FROM (SELECT ' +
+            'ROW_NUMBER() OVER (ORDER BY SUM(points) DESC) AS Ranking, ' +
+            'wallet_address, ' +
+            'SUM(points) AS Points ' +
+        'FROM ' +
+            'eggcess.airdrop ' +
+            'GROUP BY ' +
+            'wallet_address ' +
+            'ORDER BY ' +
+            'SUM(points) DESC) R ' +
+            'WHERE wallet_address = ?',
           [address]
         );
     
@@ -711,8 +729,7 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
         }
         
         // Award Airdrop points for bidding and claiming
-        if (bidClaimAmount != 0) {
-          const symbol = 'BNBUSDT';
+        if (bidClaimAmount != 0) {          
           const response = await axios.get(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`);
           if (response.data && response.data.price) {
             let bnbPrice = response.data.price;

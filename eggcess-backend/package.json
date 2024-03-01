@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@thirdweb-dev/chains": "^0.1.55",
+    "@thirdweb-dev/chains": "^0.1.75",
     "@thirdweb-dev/sdk": "^4.0.7",
     "@thirdweb-dev/wallets": "^2.0.8",
     "axios": "^1.5.1",

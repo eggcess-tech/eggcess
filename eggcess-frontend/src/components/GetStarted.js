@@ -6,7 +6,7 @@ const GetStarted = () => {
     const navigate = useNavigate(); // Initialize navigate
     const handleGetStarted = () => {
         // Navigate to the Notification component
-        navigate('/search');
+        navigate('/dashboard');
       };
 
   return (

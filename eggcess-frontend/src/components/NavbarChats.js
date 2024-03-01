@@ -7,7 +7,9 @@ export default function NavbarChats(){
         <nav className="kol-nav">
             {/* <Link to="/" className="eggcess-text">eggcess.tech</Link> */}
             <ul>
-              <CustomLink to="../ChatsEarnings">Earnings</CustomLink>
+                <CustomLink to="../KOL">You</CustomLink>
+                <CustomLink to="../YourBids">Your Bids</CustomLink>
+                <CustomLink to="../ChatsEarnings">Earnings</CustomLink>
                 <CustomLink to="../ChatsBiddings">Biddings</CustomLink>
                 <CustomLink to="../ChatsAll">All Chats</CustomLink>
                

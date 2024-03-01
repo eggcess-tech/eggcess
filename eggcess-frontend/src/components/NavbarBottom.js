@@ -11,8 +11,8 @@ export default function NavbarBottom() {
   const location = useLocation();
 
   const customLinks = [
-    { to: '/kol', icon: HomeIcon, label: 'Home' },
-    { to: '/chatsEarnings', icon: ChatsIcon, label: 'Chats' },
+    { to: '/dashboard', icon: HomeIcon, label: 'Home' },
+    { to: '/kol', icon: ChatsIcon, label: 'Chats' },
     { to: '/search', icon: SearchIcon, label: 'Search' },
     { to: '/airdrop', icon: AirdropIcon, label: 'Airdrop' },
   ];

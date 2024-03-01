@@ -1,7 +1,8 @@
 /desktop.ini
-
+.openzeppelin/
 attachments/
 node_modules/
+build/
 .env
 .cache/
 cache

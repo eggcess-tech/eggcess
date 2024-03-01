@@ -42,6 +42,7 @@ const Bidding = () => {
   const [isSendingBid, setIsSendingBid] = useState(false);
   const [isClaimingBid, setIsClaimingBid] = useState(false);
   const [comment, setComment] = useState('');
+  const [currentCoinSymbol, setCurrentCoinSymbol] = useState('');
   const [reviewId, setReviewId] = useState('');
   const [highestAcceptedBid, setHighestAcceptedBid] = useState('');
   const [toClaim, setToClaim] = useState('');
@@ -100,7 +101,7 @@ const Bidding = () => {
   setShowPopupNotOnEggcess(false);
     //const tweetText = "Hey @" + user.screen_name + ", embrace the future of #SocialFi with @eggcesstech and earn " + parseFloat(toClaim).toFixed(4) + " BNB just by engaging!🚀 Don't miss out on this opportunity!🌟 Come join me @"; // Your tweet text
     
-    const tweetText = "Hey @" + user.screen_name + ", you have " + parseFloat(toClaim).toFixed(4) + " BNB in bids on @EggcessTech 🥚 \n\nSimply create an account and respond to claim!"
+    const tweetText = "Hey @" + user.screen_name + ", you have " + parseFloat(toClaim).toFixed(4) + " " + currentCoinSymbol + " in bids on @EggcessTech 🥚 \n\nSimply create an account and respond to claim!"
     const hashtags = ""; // Your hashtags
     const url = process.env.REACT_APP_ROOT_URL + "?ref=" + userData.ReferralCode;
     const related = "";
@@ -130,7 +131,7 @@ const Bidding = () => {
     setShowPopupFirstClaim(false);
 
      // Open a Twitter tweet popup with prepopulated text and hashtags
-    const tweetText = "I just claimed " + parseFloat(toClaim).toFixed(4) + " BNB simply by replying on @EggcessTech! \n\nCome join me at "
+    const tweetText = "I just claimed " + parseFloat(toClaim).toFixed(4) + " " + currentCoinSymbol + " simply by replying on @EggcessTech! \n\nCome join me at "
     
     //const tweetText = "Thanks @EggcessTech for the smooth interaction with my fans! I just claimed my " + parseFloat(claimable).toFixed(4) + " BNB simply by replying to my fans. Come join me @"; // Your tweet text
     const hashtags = ""; // Your hashtags
@@ -268,7 +269,7 @@ const Bidding = () => {
     let errorMessage = 'An error occurred';
 
     if (error.reason === 'insufficient funds' || error.reason === 'insufficient funds for intrinsic transaction cost') {
-      errorMessage = 'Insufficient funds. Please deposit more BNB.';
+      errorMessage = 'Insufficient funds. Please deposit more ' + currentCoinSymbol + '.';
     } else if (error.reason === 'excessive gas price') {
       errorMessage = 'Gas price is too high. Please try again later.';
     } else if (error.reason) {
@@ -325,7 +326,7 @@ const Bidding = () => {
     let errorMessage = 'An error occurred';
 
     if (error.reason === 'insufficient funds' || error.reason === 'insufficient funds for intrinsic transaction cost') {
-      errorMessage = 'Insufficient funds. Please deposit more BNB.';
+      errorMessage = 'Insufficient funds. Please deposit more ' + currentCoinSymbol + '.';
     } else if (error.reason === 'excessive gas price') {
       errorMessage = 'Gas price is too high. Please try again later.';
     } else if (error.reason) {
@@ -554,7 +555,7 @@ const Bidding = () => {
       attachment_data: encryptedAttachment,
       attachment_extension: attachmentExtension, // Assign the file extension
       coin_address: "0xb8c77482e45f1f44de1745f52c74426c631bdd52",
-      coin_symbol: "BNB",
+      coin_symbol: currentCoinSymbol,
       amount: isKOL === 1 ? 0 : biddingPrice,
       claimed: false,
       claimed_date: null,
@@ -643,8 +644,13 @@ const Bidding = () => {
 
   let prevDate = null; // Store the previous date to determine if it's a new group
 
+  const setCurrencySymbol = async () => {
+    var data = await wallet.getBalance();
+    setCurrentCoinSymbol(data.symbol);
+  }
+  
   useEffect(() => {
-    
+    setCurrencySymbol();
     setUserData(JSON.parse(localStorage.getItem('eggcess_user')));
     checkIsAddressKOL();
     getClaimable();
@@ -966,7 +972,7 @@ const Bidding = () => {
           <img src={loadingGif} alt="Loading" width={20} height={20} />
         ) : (
           <div className="claim-button-message">
-            Reply to claim {parseFloat(claimable).toFixed(4)} BNB
+            Reply to claim {parseFloat(claimable).toFixed(4)} {currentCoinSymbol} 
           </div>
         )}
         </button>
@@ -1033,10 +1039,9 @@ const Bidding = () => {
                     onChange={e => setBiddingPrice(e.target.value)}
                     style={{ marginLeft: '5px', marginRight: '5px' }}
                   />
-                  BNB
-                  
+                  { currentCoinSymbol }
                 </p>
-                <p style={{marginRight: '15px'} }>Highest Accepted: {parseFloat(highestAcceptedBid || 0).toFixed(4)} BNB</p>
+                <p style={{marginRight: '15px'} }>Highest Accepted: {parseFloat(highestAcceptedBid || 0).toFixed(4)} {currentCoinSymbol}</p>
               </div>
             )}
           </div>
@@ -1045,7 +1050,7 @@ const Bidding = () => {
           {showPopupBiddingConfirmation && (
             <PopupConfirmation
             title={"Sending Bid"}
-            message={"You are about to submit <i>" + parseFloat(biddingPrice || 0).toFixed(4) + " BNB</i> bid to <br /><b>@" + user.screen_name + "</b>"} 
+            message={"You are about to submit <i>" + parseFloat(biddingPrice || 0).toFixed(4) + " " + currentCoinSymbol + " </i> bid to <br /><b>@" + user.screen_name + "</b>"} 
             onConfirm={(confirmed) => {
               if (confirmed) {
                 handleSendBid();
@@ -1059,7 +1064,7 @@ const Bidding = () => {
           {showPopupClaimingConfirmation && (
             <PopupConfirmation
             title={"Claiming Bid"}
-            message={"You are about to claim <i>" + parseFloat(claimable || 0).toFixed(4) + " BNB</i> bid from <br /><b>@" + user.screen_name + "</b>"}
+            message={"You are about to claim <i>" + parseFloat(claimable || 0).toFixed(4) + " " + currentCoinSymbol + "</i> bid from <br /><b>@" + user.screen_name + "</b>"}
             onConfirm={(confirmed) => {
               if (confirmed) {
                 handleClaimBid();

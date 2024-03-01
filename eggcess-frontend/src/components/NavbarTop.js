@@ -2,10 +2,8 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom"
 import React, { useEffect, useState, useCallback } from 'react';
 import eggLogo from '../images/egg-logo.png';
 import turnOnNotifications from '../images/turn-on-notifications.png';
-import { OpbnbTestnet, Opbnb } from "@thirdweb-dev/chains";
+import { OpbnbTestnet, Opbnb, BlastSepoliaTestnet, Ethereum } from "@thirdweb-dev/chains";
 import Popup from "../components/Popup";
-import { Magic } from 'magic-sdk';
-
 
 import {
   ConnectWallet,
@@ -29,7 +27,6 @@ const NavbarTopContent = () => {
   const [notificationPermission, setNotificationPermission] = useState('default');
   const [permissionStatus, setPermissionStatus] = useState('default');
   const [showPopupNotification, setshowPopupNotification] = useState(false);
-  //const magic = new Magic(process.env.REACT_APP_MAGICLINK_API);
  
   //const wallet = useWallet();
   const isMismatched = useNetworkMismatch();
@@ -100,14 +97,9 @@ const NavbarTopContent = () => {
     }
   };
 
-  const magic = new Magic(process.env.REACT_APP_MAGICLINK_API);
-
-  const getMagicUserEmail =async () => {
-    console.log((await magic.user.getMetadata()).email);
-  }
+ 
   useEffect(() => {
     
-    getMagicUserEmail();
 
     if ('Notification' in window) {
         setNotificationPermission(Notification.permission);
@@ -118,13 +110,17 @@ const NavbarTopContent = () => {
       console.log("Switching chain..")
       setIsLoading(true); // Set loading state to true
       if (process.env.NODE_ENV === 'production'){
-        switchChain(Opbnb.chainId).then(() => {
-          setIsLoading(false); // Set loading state to false after switching
-        });
+        //switchChain(Opbnb.chainId).then(() => {
+        //  setIsLoading(false); // Set loading state to false after switching
+        //});
       }else{
-        switchChain(OpbnbTestnet.chainId).then(() => {
-          setIsLoading(false); // Set loading state to false after switching
-        });
+        // switchChain(OpbnbTestnet.chainId).then(() => {
+        //   setIsLoading(false); // Set loading state to false after switching
+        // });
+
+        // switchChain(BlastSepoliaTestnet.chainId).then(() => {
+        //   setIsLoading(false); // Set loading state to false after switching
+        // });
       }
     }
   }, []);
@@ -161,10 +157,7 @@ const NavbarTopContent = () => {
     </button>
   )}
 
-  {isLoading ? (
-    // Render loading icon when isLoading is true
-    <div className="profile-button">Loading...</div>
-  ) : (
+ 
     <ConnectWallet
       switchToActiveChain="true"
       theme="light"
@@ -177,7 +170,7 @@ const NavbarTopContent = () => {
       }}
       style={{ fontSize: '12px' }}
     />
-  )}
+  
 </div>
 
 

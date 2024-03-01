@@ -14,6 +14,8 @@ async function main() {
   const eggcess = await upgrades.deployProxy(Eggcess, ["0xbB6b7982aCF048c7A64a28637F236BC90F438f93", "0x98E9eE9d14ce53E9A7b1B43dcA8E6CA9AE11638C", "0x1c4C3B9FE66df73f7985BAe9087371a0aee7C554"], {
     constructorArgs: [],
     initializer: "initialize",
+    gasPrice: 864340857121033, 
+    gasLimit: 6660666,
   });
 
   await eggcess.waitForDeployment();

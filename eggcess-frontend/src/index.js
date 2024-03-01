@@ -5,10 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './styles/Main.css';
 import { BrowserRouter } from "react-router-dom"
-import { OpbnbTestnet, Opbnb } from "@thirdweb-dev/chains";
+import { OpbnbTestnet, Opbnb, BlastSepoliaTestnet, BlastBlastmainnet } from "@thirdweb-dev/chains";
 import {
-  ThirdwebProvider,
-  magicLink,
+    ThirdwebProvider,
+    embeddedWallet,
 } from "@thirdweb-dev/react";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,20 +16,17 @@ root.render(
   <React.StrictMode>
     <ThirdwebProvider 
         theme="light"
-        activeChain={process.env.NODE_ENV === 'production' ? Opbnb : OpbnbTestnet}
+
         clientId={process.env.REACT_APP_THIRDWEB_CLIENTID}
-        supportedChains={[process.env.NODE_ENV === 'production' ? Opbnb : OpbnbTestnet]}
+        supportedChains={[process.env.NODE_ENV === 'production' ? BlastBlastmainnet : BlastSepoliaTestnet]}
         supportedWallets={[
-          //metamaskWallet(),
-          magicLink({
-            apiKey: process.env.REACT_APP_MAGICLINK_API,
-            oauthOptions: {
-              providers: [
-                "google",
-              ],
+          embeddedWallet({
+            auth: {
+              options: ["google", "apple"],
             },
           }),
-      ]}>
+        ]}
+      >
     <BrowserRouter>
       <App />
     </BrowserRouter>

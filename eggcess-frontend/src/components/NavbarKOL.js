@@ -7,8 +7,7 @@ export default function NavbarKOL(){
         <nav className="kol-nav">
             {/* <Link to="/" className="eggcess-text">eggcess.tech</Link> */}
             <ul>
-              <CustomLink to="../KOL">You</CustomLink>
-                <CustomLink to="../YourBids">Your Bids</CustomLink>
+                
                 <CustomLink to="../GlobalBids">Global</CustomLink>
                 <CustomLink to="../TopBids">Top</CustomLink>
             </ul>

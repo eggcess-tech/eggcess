@@ -1,7 +1,5 @@
 import React, {useEffect, useState } from 'react';
 import '../styles/Main.css';
-import { Magic } from 'magic-sdk';
-
 
 const PleaseWait = () => {
   return (
@@ -13,18 +11,18 @@ const apiCreateUserUrl = `${process.env.REACT_APP_SERVER_ROOT_URL + "/api/create
 
 
 const PleaseWaitContent = () => {
+  
   const [user, setUser] = useState(null);
   const [loginSuccessfully, setLoginSuccessfully] = useState(false);
 
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
-
     // Get the "user" parameter and decode it
     const userParam = queryParams.get('user');
     if (userParam) {
       const userData = JSON.parse(decodeURIComponent(userParam));
-      createUser(userData.username,userData.username,localStorage.getItem('new_wallet_address'),userData.photos, localStorage.getItem('referredBy'), userData.username+"@twitter");
+      createUser(userData.username,userData.username,localStorage.getItem('new_wallet_address'),userData.photos, localStorage.getItem('referredBy'), userData.username+"@twitter", localStorage.getItem('email'));
 
       setUser(userData);
     }
@@ -32,11 +30,12 @@ const PleaseWaitContent = () => {
     
   }, []);
 
-  const createUser = async (name, twitter, walletAddress, profileImageUrl, ReferredBy, eggcess_handle) => {
+  const createUser = async (name, twitter, walletAddress, profileImageUrl, ReferredBy, eggcess_handle, email) => {
     try {
 
-      const magic = new Magic(process.env.REACT_APP_MAGICLINK_API);
-      const email = (await magic.user.getMetadata()).email;
+     
+   
+
       console.log('email: ' + email);
       const response = await fetch(apiCreateUserUrl, {
         method: 'POST',
@@ -50,7 +49,7 @@ const PleaseWaitContent = () => {
           profile_image_url: profileImageUrl,
           ReferredBy,
           eggcess_handle,
-          email: email
+          email
         })
       });
       
