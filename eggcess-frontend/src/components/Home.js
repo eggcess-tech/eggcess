@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../styles/Main.css';
 import eggLogo from '../images/egg-logo.png';
 import { useNavigate  } from 'react-router-dom';  // Import Redirect from react-router-dom
-import { OpbnbTestnet, Opbnb, BlastSepoliaTestnet, Ethereum} from "@thirdweb-dev/chains";
+import { OpbnbTestnet, Opbnb, BlastSepoliaTestnet, BlastBlastmainnet} from "@thirdweb-dev/chains";
 import PopupPrivacy from "../components/PopupPrivacy";
 
 import {
@@ -96,16 +96,16 @@ const HomeContent = () => {
   
 
   useEffect(() => {
-   
+    
     const urlParams = new URLSearchParams(window.location.search);
     const referredBy = urlParams.get('ref');
     if (embeddedWallet) {
-      
+      console.log("Environmnent: " + process.env.NODE_ENV)
       if (process.env.NODE_ENV === 'production'){
-        //switchChain(Opbnb.chainId);
+        switchChain(BlastBlastmainnet.chainId);
         //console.log("Switching to Opbnb");
       }else{
-        // switchChain(OpbnbTestnet.chainId);
+        switchChain(BlastSepoliaTestnet.chainId);
         // console.log("Switching to OpbnbTestnet");
         //switchChain(BlastSepoliaTestnet.chainId);
         //console.log("Switching to BlastSepoliaTestnet");
