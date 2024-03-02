@@ -913,7 +913,7 @@ body, html {
     width: 100%;
     align-items: center;
     height: 100%;
-    font-size: 10px;
+    font-size: 11px;
   }
 }
 
@@ -1538,20 +1538,19 @@ leaderboard-entry {
 
 .dashboard-container {
   display: flex;
-  justify-content: center; 
   flex-direction: column;
-  width: 100%;
-  max-width: 600px;
- 
-  padding-top: 100px;
+  padding-top: 80px;
   padding-bottom: 100px;
-  align-items: center ;
+  align-items: center;
+  width: 80%;
+  max-width: 500px;
 }
 
 .dashboard-points {
+  margin-top: 10px;
   display: flex;
   justify-content: center; 
-  width: 90%;
+  width: 100%;
   align-content: center;
 }
 
@@ -1559,15 +1558,25 @@ leaderboard-entry {
 .box {
   border: 1px solid #ccc;
   border-radius: 8px;
-  
   margin: 10px;
   text-align: center;
   width: 40%;
   justify-content: space-between;
 }
 
+
 .box p{
  font-size: 22px;
+}
+
+@media screen and (max-width: 600px) {
+  .box p{
+    font-size: 15px;
+   }
+
+   .box h2{
+    font-size: 15px;
+   }
 }
 
 /* CSS for BidInfo component */

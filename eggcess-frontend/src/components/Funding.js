@@ -84,7 +84,7 @@ const Funding = () => {
         <br />
         <div className="description-box" style={{ width: '95%' }}>
         <p><b>Option 2</b></p>
-        <p>Bridge ETH from your Ethereum Mainnet wallet in to Blast L2<br /> Eggcess wallet using <a href="https://blast.io/en/bridge" target="_blank">https://blast.io/en/bridge</a>
+        <p>Bridge ETH from your Ethereum Mainnet wallet in to Blast L2 Eggcess wallet using <a href="https://blast.io/en/bridge" target="_blank">Blast L2 bridge</a>
         </p>
 
         <p>You'll use ETH when you bid for access to your favorite people.</p>
