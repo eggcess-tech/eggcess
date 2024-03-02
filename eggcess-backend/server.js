@@ -323,7 +323,7 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
       }
     });
 
-    async function claimWallet(from_address, wallet_address, eggcess_handle, contract2, system_address, currentGasPrice)
+    async function claimWallet(from_address, wallet_address, eggcess_handle, contract2, system_address)
     {
       try {
         
@@ -332,9 +332,9 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
         console.log("eggcess_handle: " + eggcess_handle);
         console.log("wallet_address: " + wallet_address);
         
-        const options = {
-         gasPrice: currentGasPrice, // Use the adjusted "max fee per gas"
-         };
+        // const options = {
+        //  gasPrice: currentGasPrice, // Use the adjusted "max fee per gas"
+        //  };
 
         // Call the updateToAddress function
         const tx = await contract2.updateToAddress(
@@ -375,17 +375,32 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
         
         console.log("Updated user: " + userexist.affectedRows);
 
+        
+
+
         if (userexist.affectedRows == 0)
         {
-        
           await connection.execute('INSERT INTO users (name, twitter, wallet_address, profile_image_url, ReferralCode, ReferredBy, eggcess_handle, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [name, twitter, wallet_address, profile_image_url, ReferralCode, ReferredBy, eggcess_handle, emailValue]);
           console.log('Handler claimed!');
-      
         }
         else
         {
           const [updatedRows] = await connection.execute('SELECT * FROM bids WHERE ToAddress = ?', [eggcess_handle]);
+          const [FromAddressExist] = await connection.execute('UPDATE bids b ' +
+          'INNER JOIN users u ON b.FromAddress = u.old_wallet_address ' +
+          'SET b.FromAddress = u.wallet_address ' +
+          'WHERE u.eggcess_handle = ? ' +
+          'AND b.id > 0', [eggcess_handle]);
+        
+          console.log("FromAddressExist: " + FromAddressExist.affectedRows);
 
+        const [ToAddressExist] = await connection.execute('UPDATE bids b ' +
+          'INNER JOIN users u ON b.ToAddress = u.old_wallet_address ' +
+          'SET b.ToAddress = u.wallet_address ' +
+          'WHERE u.eggcess_handle = ? ' +
+          'AND b.id > 0', [eggcess_handle]);
+    
+        console.log("ToAddressExist: " + ToAddressExist.affectedRows);
           if (updatedRows.length > 0) {
             // Group the rows by FromAddress
             const rowsByFromAddress = updatedRows.reduce((accumulator, row) => {
@@ -401,16 +416,17 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
             // Connect to the contract using the wallet
             const contract2 = new ethers.Contract(contractAddress, contractAbi, await wallet.getSigner());
             const system_address = await wallet.getAddress();
-            const currentGasPrice = await getGasPrice();
+            //const currentGasPrice = await getGasPrice();
 
             for (const fromAddress in rowsByFromAddress) {
               // Update the rows in this group
-
-              await claimWallet(fromAddress , wallet_address, eggcess_handle, contract2, system_address, currentGasPrice);
+              await claimWallet(fromAddress , wallet_address, eggcess_handle, contract2, system_address);
             }
           
             console.log('Handler claimed!');
             console.log('Bids claimed!');
+
+            
           } else {
             console.log('No rows to update.');
           }

@@ -239,18 +239,18 @@ const Bidding = () => {
       const signer = await wallet.getSigner();
       const contract2 = new ethers.Contract(contractAddress, contractAbi, signer);
 
-      const gasPrice = await getGasPrice(); // Get the current gas price
+      //const gasPrice = await getGasPrice(); // Get the current gas price
 
       
       //const blockBaseFee = await provider.getGasPrice(); // Get the current block base fee
-      console.log("gasPrice: " + gasPrice);
+      //console.log("gasPrice: " + gasPrice);
       // Set a "max fee per gas" significantly higher than the current block base fee
       //const maxFeePerGas = blockBaseFee.mul(2); // Double the base fee
       //alert(biddingPrice);
 
       const options = {
         value: ethers.utils.parseEther(biddingPrice),
-        gasPrice: gasPrice, // Use the adjusted "max fee per gas"
+        //gasPrice: gasPrice, // Use the adjusted "max fee per gas"
         //gasLimit: 3000000, // The maximum amount of gas this transaction is permitted to use.
       
       };
