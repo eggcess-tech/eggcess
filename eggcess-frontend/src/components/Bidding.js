@@ -208,15 +208,15 @@ const Bidding = () => {
   };
   
 
-  const getGasPrice = async () => {
-    try {
-      const gasPrice = await provider.getGasPrice();
-      console.log(`Current gas price on BSC: ${ethers.utils.formatUnits(gasPrice, 'gwei')} Gwei`);
-      return gasPrice;
-    } catch (error) {
-      console.error('Error getting gas price:', error);
-    }
-  };
+  // const getGasPrice = async () => {
+  //   try {
+  //     const gasPrice = await provider.getGasPrice();
+  //     console.log(`Current gas price on BSC: ${ethers.utils.formatUnits(gasPrice, 'gwei')} Gwei`);
+  //     return gasPrice;
+  //   } catch (error) {
+  //     console.error('Error getting gas price:', error);
+  //   }
+  // };
 
   const handleSendBid = async () => {
 
@@ -305,17 +305,17 @@ const Bidding = () => {
       const receiverAddress = user.wallet_address;
       const receiverHandle = userData.eggcess_handle;
 
-      const gasPrice = await getGasPrice(); // Get the current gas price
+      //const gasPrice = await getGasPrice(); // Get the current gas price
       //const blockBaseFee = await provider.getGasPrice(); // Get the current block base fee
-      console.log("gasPrice: " + gasPrice);
-      const options = {
+      //console.log("gasPrice: " + gasPrice);
+      //const options = {
        
-        gasPrice: gasPrice, // Use the adjusted "max fee per gas"
+        //gasPrice: gasPrice, // Use the adjusted "max fee per gas"
         //gasLimit: 3000000, // The maximum amount of gas this transaction is permitted to use.
       
-      };
+     // };
 
-      const tx = await contract2.claimBalance(receiverAddress, receiverHandle, options);
+      const tx = await contract2.claimBalance(receiverAddress, receiverHandle);
       await tx.wait();
 
       handleSendMessage();

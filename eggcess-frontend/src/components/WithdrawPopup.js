@@ -89,15 +89,15 @@ const WithdrawPopup = ({ bid, onClose, fetchBids, show }) => {
     setShowPopupError(false);
   }
 
-  const getGasPrice = async () => {
-    try {
-      const gasPrice = await provider.getGasPrice();
-      console.log(`Current gas price on BSC: ${ethers.utils.formatUnits(gasPrice, 'gwei')} Gwei`);
-      return gasPrice;
-    } catch (error) {
-      console.error('Error getting gas price:', error);
-    }
-  };
+  // const getGasPrice = async () => {
+  //   try {
+  //     const gasPrice = await provider.getGasPrice();
+  //     console.log(`Current gas price on BSC: ${ethers.utils.formatUnits(gasPrice, 'gwei')} Gwei`);
+  //     return gasPrice;
+  //   } catch (error) {
+  //     console.error('Error getting gas price:', error);
+  //   }
+  // };
   
   const wallet = useWallet();
   const handleWithdrawBid = async () => {

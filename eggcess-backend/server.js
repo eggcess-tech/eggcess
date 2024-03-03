@@ -64,15 +64,15 @@ const provider = new ethers.providers.JsonRpcProvider(providerUrl);
 const symbol = 'ETHUSDT';
 
 
-const getGasPrice = async () => {
-  try {
-    const gasPrice = await provider.getGasPrice();
-    console.log(`Current gas price on BSC: ${ethers.utils.formatUnits(gasPrice, 'gwei')} Gwei`);
-    return gasPrice;
-  } catch (error) {
-    console.error('Error getting gas price:', error);
-  }
-};
+// const getGasPrice = async () => {
+//   try {
+//     const gasPrice = await provider.getGasPrice();
+//     console.log(`Current gas price on BSC: ${ethers.utils.formatUnits(gasPrice, 'gwei')} Gwei`);
+//     return gasPrice;
+//   } catch (error) {
+//     console.error('Error getting gas price:', error);
+//   }
+// };
 
 webpush.setVapidDetails(
   'mailto:' + process.env.VAPID_MAILTO,
