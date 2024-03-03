@@ -267,7 +267,7 @@ const Bidding = () => {
     } catch (error) {
       // Handle specific error messages based on the error reason
     let errorMessage = 'An error occurred';
-
+    console.log(error.reason);
     if (error.reason === 'insufficient funds' || error.reason === 'insufficient funds for intrinsic transaction cost') {
       errorMessage = 'Insufficient funds. Please deposit more ' + currentCoinSymbol + '.';
     } else if (error.reason === 'cannot estimate gas; transaction may fail or may require manual gas limit'){
@@ -275,7 +275,7 @@ const Bidding = () => {
     } else if (error.reason === 'excessive gas price') {
       errorMessage = 'Gas price is too high. Please try again later.';
     } else if (error.reason) {
-      errorMessage = `Error: ${error.reason}`;
+      errorMessage = `Error: ${error}`;
     }
 
     console.error(error);
