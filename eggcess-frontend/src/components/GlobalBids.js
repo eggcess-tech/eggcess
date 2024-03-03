@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NavbarKOL from '../components/NavbarKOL';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
+import roundDecimals from '../lib/until.js'
 
 const GlobalBidsInfo = ({ bid }) => {
   const user_data = JSON.parse(localStorage.getItem('eggcess_user'));
@@ -84,7 +85,7 @@ const GlobalBidsInfo = ({ bid }) => {
       </p>
 
         <p>
-          {parseFloat(bid.Amount).toFixed(4)} {bid.CoinSymbol} - {timeAgo} ago
+          {roundDecimals(parseFloat(bid.Amount))} {bid.CoinSymbol} - {timeAgo} ago
         </p>
       </div>
     </div>

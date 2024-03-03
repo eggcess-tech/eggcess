@@ -3,7 +3,7 @@ import NavbarChats from '../components/NavbarChats';
 
 import axios from 'axios';
 import MessagePopup from '../components/WithdrawPopup'; // Import your popup component
-
+import roundDecimals from '../lib/until.js'
 
 const YourBidsInfo = ({ bid, fetchBids }) => {
   const timeAgo = calculateTimeAgo(bid.SendDate); // Assuming you have a function to calculate time ago
@@ -28,7 +28,7 @@ const YourBidsInfo = ({ bid, fetchBids }) => {
         </p>
        
         <p>
-          {parseFloat(bid.Amount).toFixed(4)} {bid.CoinSymbol} - {timeAgo} ago
+          {roundDecimals(parseFloat(bid.Amount))} {bid.CoinSymbol} - {timeAgo} ago
         </p>
       </div>
        <button onClick={handleConnectClick} className="withdraw-button">

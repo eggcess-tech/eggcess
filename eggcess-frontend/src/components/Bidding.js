@@ -13,7 +13,7 @@ import ThreeStars from '../images/threeStars.png';
 import FourStars from '../images/fourStars.png';
 import FiveStars from '../images/fiveStars.png';
 import loadingGif from '../images/loading.gif';
-
+import roundDecimals from '../lib/until.js'
 import Popup from "../components/Popup";
 
 import PopupConfirmation from "../components/PopupConfirmation";
@@ -101,7 +101,7 @@ const Bidding = () => {
   setShowPopupNotOnEggcess(false);
     //const tweetText = "Hey @" + user.screen_name + ", embrace the future of #SocialFi with @eggcesstech and earn " + parseFloat(toClaim).toFixed(4) + " BNB just by engaging!🚀 Don't miss out on this opportunity!🌟 Come join me @"; // Your tweet text
     
-    const tweetText = "Hey @" + user.screen_name + ", you have " + parseFloat(toClaim).toFixed(4) + " " + currentCoinSymbol + " in bids on @EggcessTech 🥚 \n\nSimply create an account and respond to claim!"
+    const tweetText = "Hey @" + user.screen_name + ", you have " + roundDecimals(parseFloat(toClaim)) + " " + currentCoinSymbol + " in bids on @EggcessTech 🥚 \n\nSimply create an account and respond to claim!"
     const hashtags = ""; // Your hashtags
     const url = process.env.REACT_APP_ROOT_URL + "?ref=" + userData.ReferralCode;
     const related = "";
@@ -131,7 +131,7 @@ const Bidding = () => {
     setShowPopupFirstClaim(false);
 
      // Open a Twitter tweet popup with prepopulated text and hashtags
-    const tweetText = "I just claimed " + parseFloat(toClaim).toFixed(4) + " " + currentCoinSymbol + " simply by replying on @EggcessTech! \n\nCome join me at "
+    const tweetText = "I just claimed " + roundDecimals(parseFloat(toClaim)) + " " + currentCoinSymbol + " simply by replying on @EggcessTech! \n\nCome join me at "
     
     //const tweetText = "Thanks @EggcessTech for the smooth interaction with my fans! I just claimed my " + parseFloat(claimable).toFixed(4) + " BNB simply by replying to my fans. Come join me @"; // Your tweet text
     const hashtags = ""; // Your hashtags
@@ -381,11 +381,11 @@ const Bidding = () => {
         setIsEggcessUser(true);
       }
       console.log("Check setIsEggcessUser 4");
-      setHighestAcceptedBid((parseFloat(user.highest_accepted_bid || 0)).toFixed(4));
+      setHighestAcceptedBid((roundDecimals(parseFloat(user.highest_accepted_bid || 0))));
 
       if (biddingPrice === "0")
       {
-        setBiddingPrice((parseFloat(user.highest_accepted_bid || 0) + 0.001).toFixed(4));
+        setBiddingPrice((roundDecimals(parseFloat(user.highest_accepted_bid || 0) + 0.001)));
       }
       
       
@@ -810,14 +810,14 @@ const Bidding = () => {
                   
                   {msg.Claimed===1 && (
                     <div>
-                      Claimed {parseFloat(msg.Amount).toFixed(4)} {msg.CoinSymbol}
+                      Claimed {roundDecimals(parseFloat(msg.Amount))} {msg.CoinSymbol}
                     </div>
                   )}
 
 
                   {isKOL===1 && msg.Amount > 0 && (!msg.Claimed) &&  (
                     <div className="claim-message">
-                      Reply to claim {parseFloat(msg.Amount).toFixed(4)} {msg.CoinSymbol}
+                      Reply to claim {roundDecimals(parseFloat(msg.Amount))} {msg.CoinSymbol}
                     </div>
                   )}
                   
@@ -993,7 +993,7 @@ const Bidding = () => {
           <img src={loadingGif} alt="Loading" width={20} height={20} />
         ) : (
           <div className="claim-button-message">
-            Reply to claim {parseFloat(claimable).toFixed(4)} {currentCoinSymbol} 
+            Reply to claim {roundDecimals(parseFloat(claimable))} {currentCoinSymbol} 
           </div>
         )}
         </button>
@@ -1062,7 +1062,7 @@ const Bidding = () => {
                   />
                   { currentCoinSymbol }
                 </p>
-                <p style={{marginRight: '15px'} }>Highest Accepted: {parseFloat(highestAcceptedBid || 0).toFixed(4)} {currentCoinSymbol}</p>
+                <p style={{marginRight: '15px'} }>Highest Accepted: {roundDecimals(parseFloat(highestAcceptedBid || 0))} {currentCoinSymbol}</p>
               </div>
             )}
           </div>
@@ -1071,7 +1071,7 @@ const Bidding = () => {
           {showPopupBiddingConfirmation && (
             <PopupConfirmation
             title={"Sending Bid"}
-            message={"You are about to submit <i>" + parseFloat(biddingPrice || 0).toFixed(4) + " " + currentCoinSymbol + " </i> bid to <br /><b>@" + user.screen_name + "</b>"} 
+            message={"You are about to submit <i>" + roundDecimals(parseFloat(biddingPrice || 0)) + " " + currentCoinSymbol + " </i> bid to <br /><b>@" + user.screen_name + "</b>"} 
             onConfirm={(confirmed) => {
               if (confirmed) {
                 handleSendBid();
@@ -1085,7 +1085,7 @@ const Bidding = () => {
           {showPopupClaimingConfirmation && (
             <PopupConfirmation
             title={"Claiming Bid"}
-            message={"You are about to claim <i>" + parseFloat(claimable || 0).toFixed(4) + " " + currentCoinSymbol + "</i> bid from <br /><b>@" + user.screen_name + "</b>"}
+            message={"You are about to claim <i>" + roundDecimals(parseFloat(claimable || 0)) + " " + currentCoinSymbol + "</i> bid from <br /><b>@" + user.screen_name + "</b>"}
             onConfirm={(confirmed) => {
               if (confirmed) {
                 handleClaimBid();

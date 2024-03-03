@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NavbarChats from '../components/NavbarChats';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
+import roundDecimals from '../lib/until.js'
 
 const BidInfo = ({ bid, handleListItemClick}) => {
   const timeAgo = calculateTimeAgo(bid.LatestSendDate); // Assuming you have a function to calculate time ago
@@ -20,7 +21,7 @@ const BidInfo = ({ bid, handleListItemClick}) => {
         </p>
         
         <p>
-          {parseFloat(bid.Total).toFixed(4)} {bid.CoinSymbol} - {timeAgo} ago
+          {roundDecimals(parseFloat(bid.Total))} {bid.CoinSymbol} - {timeAgo} ago
         </p>
       </div>
       

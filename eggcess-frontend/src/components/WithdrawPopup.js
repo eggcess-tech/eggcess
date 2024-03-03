@@ -7,6 +7,7 @@ import contractAbi from '../abi/eggcess_app.json';
 import loadingGif from '../images/loading.gif';
 import Popup from "../components/Popup";
 import ModalImage from "react-modal-image";
+import roundDecimals from '../lib/until.js'
 
 const WithdrawPopup = ({ bid, onClose, fetchBids, show }) => {
  
@@ -249,7 +250,7 @@ const WithdrawPopup = ({ bid, onClose, fetchBids, show }) => {
                 </button>
               </div>
               </div>
-              <p>Bid amount {parseFloat(bid.Amount).toFixed(4)} {bid.CoinSymbol}</p>
+              <p>Bid amount {roundDecimals(parseFloat(bid.Amount))} {bid.CoinSymbol}</p>
             </div>
           )}
         </div>

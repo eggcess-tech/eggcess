@@ -5,6 +5,7 @@ import TwitterIcon from '../images/twitter-small-icon.png';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
 import { SearchResultContext } from '../components/SearchResultContext';
 import { useWallet  } from "@thirdweb-dev/react";
+import roundDecimals from '../lib/until.js'
 
 const Search = () => {
     const { searchText, setSearchText } = useContext(SearchResultContext);
@@ -110,8 +111,8 @@ const Search = () => {
                         ) : null}
                   </div>
                   <br />
-                  <p style={{ margin: '0', padding: '0' }}>Current Bid: {(parseFloat(user.last_offered_bid || 0) + 0.001).toFixed(4) } { currentCoinSymbol}</p>
-                  <p style={{ margin: '0', padding: '0' }}>Highest Accepted: {parseFloat(user.highest_accepted_bid || 0).toFixed(4)} {currentCoinSymbol}</p>
+                  <p style={{ margin: '0', padding: '0' }}>Current Bid: {roundDecimals((parseFloat(user.last_offered_bid || 0) + 0.001)) } { currentCoinSymbol}</p>
+                  <p style={{ margin: '0', padding: '0' }}>Highest Accepted: {roundDecimals(parseFloat(user.highest_accepted_bid || 0))} {currentCoinSymbol}</p>
                 </div>
                 </div>
                 

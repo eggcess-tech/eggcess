@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useWallet  } from "@thirdweb-dev/react";
+import roundDecimals from '../lib/until.js'
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -116,7 +117,7 @@ const Dashboard = () => {
             .
           </p>
           <p>
-            {parseFloat(bid.Amount).toFixed(4)} {bid.CoinSymbol} - {timeAgo} ago
+            {roundDecimals(parseFloat(bid.Amount))} {bid.CoinSymbol} - {timeAgo} ago
           </p>
         </div>
       </div>

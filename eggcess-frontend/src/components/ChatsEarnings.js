@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NavbarChats from '../components/NavbarChats';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
-
+import roundDecimals from '../lib/until.js'
 
 
 const ChatsEarningsInfo = ({ chat, handleListItemClick }) => {
@@ -20,7 +20,7 @@ const ChatsEarningsInfo = ({ chat, handleListItemClick }) => {
          <p>@{chat.screen_name}</p><p></p>
       </div>
       <div className="bid-positive">
-        {parseFloat(chat.Total).toFixed(4)} {chat.CoinSymbol}
+        {roundDecimals(parseFloat(chat.Total))} {chat.CoinSymbol}
       </div>
     </div>
   );
