@@ -135,6 +135,8 @@ const WithdrawPopup = ({ bid, onClose, fetchBids, show }) => {
 
     if (error.reason === 'insufficient funds' || error.reason === 'insufficient funds for intrinsic transaction cost') {
       errorMessage = 'Insufficient funds. Please deposit more ' + bid.CoinSymbol + '.';
+    } else if (error.reason === 'cannot estimate gas; transaction may fail or may require manual gas limit'){
+      errorMessage = 'Make sure you have enough gas fee.';
     } else if (error.reason === 'excessive gas price') {
       errorMessage = 'Gas price is too high. Please try again later.';
     } else if (error.reason) {
