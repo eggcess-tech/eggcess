@@ -1542,8 +1542,8 @@ leaderboard-entry {
   padding-top: 80px;
   padding-bottom: 100px;
   align-items: center;
-  width: 80%;
-  max-width: 500px;
+  width: 90%;
+  max-width: 600px;
 }
 
 .dashboard-points {
@@ -1586,8 +1586,6 @@ leaderboard-entry {
   flex-direction: column;
   width: 100%;
   max-width: 600px;
-  margin-left: 10px;
-
 }
 
 .bid-info-view {

@@ -385,20 +385,23 @@ app.get('/api/auth/twitter/callback', passport.authenticate('twitter', {
         }
         else
         {
-          const [updatedRows] = await connection.execute('SELECT * FROM bids WHERE ToAddress = ?', [eggcess_handle]);
           const [FromAddressExist] = await connection.execute('UPDATE bids b ' +
-          'INNER JOIN users u ON b.FromAddress = u.old_wallet_address ' +
-          'SET b.FromAddress = u.wallet_address ' +
-          'WHERE u.eggcess_handle = ? ' +
-          'AND b.id > 0', [eggcess_handle]);
+            'INNER JOIN users u ON b.FromAddress = u.old_wallet_address ' +
+            'SET b.FromAddress = u.wallet_address ' +
+            'WHERE u.eggcess_handle = ? ' +
+            'AND b.id > 0', [eggcess_handle]);
         
           console.log("FromAddressExist: " + FromAddressExist.affectedRows);
 
-        const [ToAddressExist] = await connection.execute('UPDATE bids b ' +
-          'INNER JOIN users u ON b.ToAddress = u.old_wallet_address ' +
-          'SET b.ToAddress = u.wallet_address ' +
-          'WHERE u.eggcess_handle = ? ' +
-          'AND b.id > 0', [eggcess_handle]);
+          const [ToAddressExist] = await connection.execute('UPDATE bids b ' +
+            'INNER JOIN users u ON b.ToAddress = u.old_wallet_address ' +
+            'SET b.ToAddress = u.wallet_address ' +
+            'WHERE u.eggcess_handle = ? ' +
+            'AND b.id > 0', [eggcess_handle]);
+
+
+          const [updatedRows] = await connection.execute('SELECT * FROM bids WHERE ToAddress = ?', [eggcess_handle]);
+          
     
         console.log("ToAddressExist: " + ToAddressExist.affectedRows);
           if (updatedRows.length > 0) {

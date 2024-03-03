@@ -181,7 +181,7 @@ const Dashboard = () => {
           </div>
           </div>
           
-        <div className="global-bids"  style={{paddingLeft: '10px', paddingRight: '10px'}}>
+        <div className="global-bids" >
         <h4>Global Bids</h4>
           {bids.map((bid) => renderGlobalBids(bid))}
         </div>

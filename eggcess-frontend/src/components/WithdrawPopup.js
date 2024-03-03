@@ -110,20 +110,20 @@ const WithdrawPopup = ({ bid, onClose, fetchBids, show }) => {
      
       const contract2 = new ethers.Contract(contractAddress, contractAbi, signer);
 
-      const gasPrice = await getGasPrice(); // Get the current gas price
+      //const gasPrice = await getGasPrice(); // Get the current gas price
       //const blockBaseFee = await provider.getGasPrice(); // Get the current block base fee
-      console.log("gasPrice: " + gasPrice);
-      const options = {
+      //console.log("gasPrice: " + gasPrice);
+      //const options = {
        
-        gasPrice: gasPrice, // Use the adjusted "max fee per gas"
+      //  gasPrice: gasPrice, // Use the adjusted "max fee per gas"
         //gasLimit: 3000000, // The maximum amount of gas this transaction is permitted to use.
       
-      };
+      //};
 
       const receiver_address = (bid.to_user_wallet_address === bid.to_eggcess_handle ? process.env.REACT_APP_E_WALLET_ADDRESS : bid.to_user_wallet_address);
       const receiver_handler = bid.to_eggcess_handle;
 
-      const tx = await contract2.withdrawBid(receiver_address, receiver_handler, ethers.utils.parseEther(bid.Amount), options);
+      const tx = await contract2.withdrawBid(receiver_address, receiver_handler, ethers.utils.parseEther(bid.Amount));
       await tx.wait();
 
       handleSendWithdraw();
