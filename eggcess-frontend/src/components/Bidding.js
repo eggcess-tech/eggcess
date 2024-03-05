@@ -101,7 +101,7 @@ const Bidding = () => {
   setShowPopupNotOnEggcess(false);
     //const tweetText = "Hey @" + user.screen_name + ", embrace the future of #SocialFi with @eggcesstech and earn " + parseFloat(toClaim).toFixed(4) + " BNB just by engaging!🚀 Don't miss out on this opportunity!🌟 Come join me @"; // Your tweet text
     
-    const tweetText = "Hey @" + user.screen_name + ", you have " + roundDecimals(parseFloat(toClaim)) + " " + currentCoinSymbol + " in bids on @EggcessTech 🥚 \n\nSimply create an account and respond to claim!"
+    const tweetText = "Hey @" + user.screen_name + ", you have " + roundDecimals(parseFloat(toClaim)) + " " + currentCoinSymbol + " in @EggcessTech 🥚 bids on @Blast_L2\n\nSimply create an account and respond to claim!"
     const hashtags = ""; // Your hashtags
     const url = process.env.REACT_APP_ROOT_URL + "?ref=" + userData.ReferralCode;
     const related = "";
@@ -131,7 +131,7 @@ const Bidding = () => {
     setShowPopupFirstClaim(false);
 
      // Open a Twitter tweet popup with prepopulated text and hashtags
-    const tweetText = "I just claimed " + roundDecimals(parseFloat(toClaim)) + " " + currentCoinSymbol + " simply by replying on @EggcessTech! \n\nCome join me at "
+    const tweetText = "I just claimed " + roundDecimals(parseFloat(toClaim)) + " " + currentCoinSymbol + " simply by replying in @EggcessTech on @Blast_L2! \n\nCome join me at "
     
     //const tweetText = "Thanks @EggcessTech for the smooth interaction with my fans! I just claimed my " + parseFloat(claimable).toFixed(4) + " BNB simply by replying to my fans. Come join me @"; // Your tweet text
     const hashtags = ""; // Your hashtags
